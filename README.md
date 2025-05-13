@@ -7,7 +7,7 @@ This is a NestJS-based contact management app. Follow the instructions below to 
 
 Ensure you have the following installed:
 
-- **Node.js** (>= 20.x)
+- **Node.js** (>= 22.x)
 - **npm** (Node Package Manager)
 - **NestJS CLI** (Install with `npm install -g @nestjs/cli`)
 

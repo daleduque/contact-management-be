@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, Injectable, NotFoundException } from '@nestjs/common';
 import { Contact } from './schemas/Contact.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model, SortOrder } from 'mongoose';
@@ -21,6 +21,10 @@ export class ContactService {
     /*  Find specific contact  */
     findContact(id: string) {
         const contact = this.contactModel.findById(id)
+
+        if(!contact) {
+            throw new NotFoundException('User not found')
+        }
         return contact
     }
 
@@ -31,8 +35,12 @@ export class ContactService {
     }
 
     /* Update Specific Contact */
-    updateContact(id: string, contactInformation: UpdateContactDto) {
-        const updateContact = this.contactModel.findByIdAndUpdate(id, contactInformation, {new: true})
+    async updateContact(id: string, contactInformation: UpdateContactDto) {
+        const updateContact = await this.contactModel.findByIdAndUpdate(id, contactInformation, {new: true})
+
+        if(!updateContact) {
+            throw new HttpException('User not found', 404)
+        }
         return updateContact
     }
 

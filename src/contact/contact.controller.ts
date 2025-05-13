@@ -1,9 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { ContactService } from './contact.service';
 import { CreateContactDto } from './DTOs/create-contact.dto';
 import { UpdateContactDto } from './DTOs/update-contact.dto';
 import { SearchContactsDto } from './DTOs/search-contact.dto';
+import { AuthGuard } from 'src/guards/auth.guard';
 
+@UseGuards(AuthGuard)
 @Controller('contact')
 export class ContactController {
 
